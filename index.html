@@ -277,27 +277,27 @@ const projects = {
     meta:[{label:'Accuracy',val:'>85%'},{label:'Users',val:'NGO field teams'},{label:'Input',val:'Drone footage'},{label:'Stack',val:'YOLO + Streamlit'}],
     what:'<p>An NGO approached the problem of plastic waste in water bodies with basically no tooling — just people going out and looking. Aquaplast gives them the chance to upload drone footage, get back detections, and see a forecast of where accumulation is heading.</p><p>It also pulls in live weather data to help teams pick the right window for a cleanup. Making it easier to take action.</p>',
     how:'<p>YOLO runs over the uploaded footage frame by frame, tagging plastic-like objects with bounding boxes. A time-series model on top of historical detection data generates the accumulation forecast. Weather API integration adds the environmental context.</p><p>The whole thing is a Streamlit app in Docker — simple to run, easy to hand off.</p>',
-    learned:'<p>Drone footage is messy. Different altitudes, different lighting, compressed artifacts from cheap cameras. I spent more time on preprocessing than on the model and that was the right call. The YOLO weights that worked on clean benchmark data needed real tuning to handle the noise.</p><p>Also: when you're building for field teams, false positives cost more than you think. Sending volunteers somewhere based on a wrong detection is worse than missing one.</p>'
+    learned:'<p>Drone footage is messy. Different altitudes, different lighting, compressed artifacts from cheap cameras. I spent more time on preprocessing than on the model and that was the right call. The YOLO weights that worked on clean benchmark data needed real tuning to handle the noise.</p><p>Also: when you\'re building for field teams, false positives cost more than you think. Sending volunteers somewhere based on a wrong detection is worse than missing one.</p>'
   },
   audiolite:{
     eyebrow:'02 / Deep Learning · Audio',
     title:'Audiolite',
-    sub:'A neural audio codec. Compress audio by 8x and reconstruct it well enough that you can't obviously tell.',
+    sub:'A neural audio codec. Compress audio by 8x and reconstruct it well enough that you can\'t obviously tell.',
     tags:['PyTorch','Autoencoders','Super Resolution','Librosa','NumPy','Docker'],
     meta:[{label:'Compression',val:'Up to 8x'},{label:'Reconstruction',val:'Super resolution'},{label:'Deployment',val:'Docker + Streamlit'},{label:'Stack',val:'PyTorch + Librosa'}],
     what:'<p>My team wanted to see how far you could push audio compression using learned representations instead of hand-crafted codecs. Audiolite compresses audio through an autoencoder bottleneck and reconstructs it using a super-resolution model.</p><p>The interesting question was whether a model could learn what matters in audio perception well enough to throw away most of the signal and still reconstruct it without any loss.</p>',
     how:'<p>Audio goes in, gets converted to a spectrogram, and runs through an autoencoder. The bottleneck is the compression. The model has to decide what to keep. On the decode side, a super-resolution model tries to recover the high-frequency components that compression always flattens out.</p><p>Packaged as a Docker + Streamlit app. You upload a file, pick a compression level, get back the output.</p>',
-    learned:'<p>Compression ratios are easy to hit. Quality is where it gets hard. The bottleneck size had a non-linear effect. Too small and the model just averages everything into mush, too large and you're not really compressing anything meaningful.</p><p>This project needs proper perceptual metrics (PESQ, STOI) benchmarked against something like Opus before I can make strong claims. The next version will have that.</p>'
+    learned:'<p>Compression ratios are easy to hit. Quality is where it gets hard. The bottleneck size had a non-linear effect. Too small and the model just averages everything into mush, too large and you\'re not really compressing anything meaningful.</p><p>This project needs proper perceptual metrics (PESQ, STOI) benchmarked against something like Opus before I can make strong claims. The next version will have that.</p>'
   },
   diabetes:{
     eyebrow:'03 / MLOps · Healthcare',
     title:'Diabetes Predictor',
-    sub:'A five-model ensemble for diabetes prediction. It's the pipeline that matters here, not the model.',
+    sub:'A five-model ensemble for diabetes prediction. It\'s the pipeline that matters here, not the model.',
     tags:['LightGBM','SVM','Random Forest','Logistic Regression','Naive Bayes','scikit-learn','CI/CD'],
     meta:[{label:'Models',val:'5-model ensemble'},{label:'Val precision',val:'0.995'},{label:'Pipeline',val:'Full MLOps'},{label:'Deploy',val:'Streamlit + CI/CD'}],
-    what:'<p>This started as a model project and turned into an infrastructure project. The goal wasn't to build a model that predicts diabetes using a standard dataset but to build a pipeline that would work in production environments.</p>',
+    what:'<p>This started as a model project and turned into an infrastructure project. The goal wasn\'t to build a model that predicts diabetes using a standard dataset but to build a pipeline that would work in production environments.</p>',
     how:'<p>Five models trained on the same preprocessed dataset, predictions ensembled. Each stage (preprocessing, training, evaluation, inference) is its own module. Automated retraining kicks in on data updates and CI/CD handles deployment.</p>',
-    learned:'<p>0.995 validation precision. It's that high because of the dataset — I chose a small dataset which could be easily augmented to help build the auto train pipeline.</p><p>What I actually got out of this: writing ML code that someone else could pick up and run without calling me. Modularity in ML pipelines is harder than it sounds when you're used to notebooks.</p>'
+    learned:'<p>0.995 validation precision. It\'s that high because of the dataset — I chose a small dataset which could be easily augmented to help build the auto train pipeline.</p><p>What I actually got out of this: writing ML code that someone else could pick up and run without calling me. Modularity in ML pipelines is harder than it sounds when you\'re used to notebooks.</p>'
   },
   moviebot:{
     eyebrow:'04 / RAG · LLMs',
@@ -305,9 +305,9 @@ const projects = {
     sub:'RAG over 25k movie embeddings. Tell it a mood, get back something worth watching.',
     tags:['LangChain','FAISS','OpenAI','Streamlit','Python','Prompt Engineering'],
     meta:[{label:'Index size',val:'25k embeddings'},{label:'Validation',val:'5k queries'},{label:'Retrieval',val:'FAISS'},{label:'Stack',val:'LangChain + OpenAI'}],
-    what:'<p>A movie recommendation chatbot that actually tries to understand what you're asking for. Not just genre tags. You can say "something that feels like a Sunday afternoon" and it'll try to figure out what that means.</p>',
+    what:'<p>A movie recommendation chatbot that actually tries to understand what you\'re asking for. Not just genre tags. You can say "something that feels like a Sunday afternoon" and it\'ll try to figure out what that means.</p>',
     how:'<p>25,000 movie descriptions embedded and indexed with FAISS. When you ask something, the retriever finds semantically similar entries and passes them as context to an LLM that generates the actual recommendation. Prompt engineering and guardrails were added after running 5k validation queries and watching it fail in interesting ways.</p>',
-    learned:'<p>The retriever was the problem, not the LLM. It kept over-indexing on genre keywords and completely missing mood-based queries — "something melancholy but not depressing" would come back with horror films because of the word "depressing."</p><p>The fix wasn't in the prompt, it was in how I chunked and embedded the descriptions. The model is just a tiny part of the whole thing.</p>'
+    learned:'<p>The retriever was the problem, not the LLM. It kept over-indexing on genre keywords and completely missing mood-based queries — "something melancholy but not depressing" would come back with horror films because of the word "depressing."</p><p>The fix wasn\'t in the prompt, it was in how I chunked and embedded the descriptions. The model is just a tiny part of the whole thing.</p>'
   }
 };
 
