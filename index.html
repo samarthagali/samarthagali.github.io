@@ -1,4 +1,5 @@
 
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap');
 :root{--ink:#2C2015;--ink-soft:#5C4A32;--ink-muted:#9C846A;--parchment:#F5EFE0;--parchment-dark:#EDE3CC;--surface:#FDFAF3;--amber:#B87333;--border:rgba(92,74,50,0.18);--tag-bg:rgba(184,115,51,0.1);--serif:'Lora',serif;--mono:'JetBrains Mono',monospace;--sans:'DM Sans',sans-serif;}
@@ -59,7 +60,50 @@ body{font-family:var(--sans);color:var(--ink);background:var(--parchment);min-he
 .about-body p{margin-bottom:1.1rem;}
 .stack-group{margin-bottom:1.25rem;}
 .stack-label{font-family:var(--mono);font-size:10px;color:var(--ink-muted);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.5rem;}
-@media(max-width:600px){.exp-item{grid-template-columns:1fr;}.about-grid{grid-template-columns:1fr;}.nav-links li:not(:last-child){display:none;}.page{padding:2.5rem 1.25rem 4rem;}}
+
+/* ── MOBILE ── */
+@media(max-width:600px){
+  /* nav */
+  .nav{padding:1rem 1.25rem;}
+  .nav-links li:not(:last-child){display:none;}
+
+  /* pages */
+  .page{padding:2.5rem 1.25rem 4rem;}
+
+  /* hero */
+  .hero-name{font-size:2rem;}
+  .hero-desc{font-size:14px;}
+
+  /* experience */
+  .exp-item{grid-template-columns:1fr;gap:0.25rem;}
+  .exp-period{display:inline;margin-right:0.5rem;}
+  .exp-company{display:inline;}
+
+  /* projects grid — single column */
+  .projects-grid{grid-template-columns:1fr;}
+  .proj-card{border-right:none;}
+
+  /* project detail meta — 2 col on mobile */
+  .proj-meta-grid{grid-template-columns:1fr 1fr;}
+
+  /* about */
+  .about-grid{grid-template-columns:1fr;gap:2rem;}
+
+  /* quotes */
+  .quote-text{font-size:0.95rem;}
+
+  /* buttons */
+  .btn-primary,.btn-ghost{font-size:11px;padding:0.55rem 1rem;}
+
+  /* post body */
+  .post-body{font-size:14px;}
+}
+
+/* ── SMALL MOBILE (iPhone SE etc) ── */
+@media(max-width:380px){
+  .hero-name{font-size:1.75rem;}
+  .proj-meta-grid{grid-template-columns:1fr;}
+}
 </style>
 
 <nav class="nav">
@@ -435,11 +479,4 @@ postStyles.textContent = `
   .post-body pre code{background:none;padding:0;font-size:12px;}
   .post-body ul,ol{padding-left:1.5rem;margin-bottom:1rem;}
   .post-body li{margin-bottom:0.4rem;}
-  .post-body blockquote{border-left:2px solid var(--amber);padding-left:1rem;margin:1.5rem 0;font-style:italic;color:var(--ink-muted);}
-  .post-body a{color:var(--amber);text-decoration:none;}
-  .post-body a:hover{text-decoration:underline;}
-  .post-body hr{border:none;border-top:0.5px solid var(--border);margin:2rem 0;}
-`;
-document.head.appendChild(postStyles);
-
-</script>
+  .post-body blockquote{border-left:2px solid var(--amber);padding-left:1rem;margin:1.5rem 0;font-style:italic;colo
